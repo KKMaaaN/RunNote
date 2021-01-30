@@ -1,0 +1,10 @@
+server:
+  port: 443
+  ssl:
+    key-store-type: PKCS12
+    key-alias: mytomcat
+    key-store: classpath:key.p12
+    key-store-password: 528868
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml  #MyBatis配置文件所在路径
+  type-aliases-package: com.kould.vo  #定义所有操作类的别名所在包
