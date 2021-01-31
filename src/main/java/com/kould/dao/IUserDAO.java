@@ -35,8 +35,8 @@ public interface IUserDAO {
     public User selectByUserId(String userId) ;
     @Select("SELECT id,name,gender,email,phoneNumber,passWord,nationality,introduction,createTime,avatar " +
             "FROM User " +
-            "WHERE phoneNumber = #{phoneNumber} AND passWord = #{passWord};")
-    public User selectByUserIdOfLogin(@Param("phoneNumber") String phoneNumber,@Param("passWord") String passWord) ;
+            "WHERE phoneNumber = #{phoneNumber} ;")
+    public User selectOfLogin(@Param("phoneNumber") String phoneNumber) ;
     @Select("SELECT id,name,gender,email,phoneNumber,nationality,introduction,createTime,avatar " +
             "FROM User " +
             "LIMIT #{start},#{stepSize};")

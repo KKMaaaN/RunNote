@@ -11,12 +11,18 @@ import com.kould.vo.Comment;
 import com.kould.vo.Crowd;
 import com.kould.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class UserServiceImpl implements IUserService {
+@Service("userDetailsService")
+public class UserServiceImpl implements IUserService, UserDetailsService {
     @Autowired
     private IPageAdapter pageAdapter ;
 
@@ -72,11 +78,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User loginCheck(String phoneNumber,String passWord) {
-        return this.userDAO.selectByUserIdOfLogin(phoneNumber,passWord);
-    }
-
-    @Override
     public List<User> allUserList(int index, int stepSize) {
         return this.userDAO.selectOfUserAll(index, stepSize);
     }
@@ -119,5 +120,17 @@ public class UserServiceImpl implements IUserService {
         user.setGroups(this.crowdDAO.selectByUserId(user.getId(),pageAdapter.indexBeStart(index, stepSize),
                 stepSize)) ;
         return user ;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = this.userDAO.selectOfLogin(s) ;
+        if (user == null) {
+            throw new UsernameNotFoundException("該用戶名不存在") ;
+        }
+        List<GrantedAuthority> auths =
+                AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_user") ;
+        return new org.springframework.security.core.userdetails.User(user.getPhoneNumber(),
+                new BCryptPasswordEncoder().encode(user.getPassWord()),auths);
     }
 }

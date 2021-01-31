@@ -1,7 +1,9 @@
 package com.kould.Controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -13,12 +15,13 @@ import java.util.Map;
 
 @RestController
 public class MessageController {
-    @RequestMapping("/")
+    @RequestMapping(value = "/")
     public String home() {
         return "歡迎來到RunNote" ;
     }
 
-    @GetMapping("/userMsg")
+    @Secured({"ROLE_user"})
+    @RequestMapping(value = "message",method = RequestMethod.POST)
     public Object userMsg() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest() ;

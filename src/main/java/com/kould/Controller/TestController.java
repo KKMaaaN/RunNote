@@ -10,6 +10,7 @@ import com.kould.vo.Comment;
 import com.kould.vo.Crowd;
 import com.kould.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,12 +30,14 @@ public class TestController {
     @Autowired
     private IUserService userService ;
 
+    @Secured({"ROLE_user"})
     @RequestMapping("errorTest")
     public String errorMethod() {
         int result = 10/0 ;
         return "Test";
     }
 
+    @Secured({"ROLE_user"})
     @RequestMapping("FindTest")
     public Object findTest() {
         return this.blogService.findByUserId("0f7e9831-a339-447a-a276-13be4bd933a3",1,5) ;

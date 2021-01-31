@@ -5,15 +5,14 @@ import com.kould.vo.User;
 import java.util.List;
 
 public interface IUserService {
-    public int add(User user) ;
-    public int remove(String userId) ;
-    public int edit(User user) ;
-    public List<User> findByUserName(String userName,int index,int stepSize) ;
-    public User findByUserId(String userId,int index,int stepSize) ;
-    public User loginCheck(String phoneNumber,String passWord) ;
-    public List<User> allUserList(int index,int stepSize) ;
+    int add(User user) ;
+    int remove(String userId) ;
+    int edit(User user) ;
+    List<User> findByUserName(String userName,int index,int stepSize) ;
+    User findByUserId(String userId,int index,int stepSize) ;
+    List<User> allUserList(int index,int stepSize) ;
 
-    public User findByBlogId(String blogId,int index,int stepSize) ;
-    public User findByCommentId(String commentId,int index,int stepSize) ;
-    public List<User> findByCrowdId(String crowdId,int index,int stepSize) ;
+    User findByBlogId(String blogId,int index,int stepSize) ;
+    User findByCommentId(String icommentId,int index,int stepSize) ;
+    List<User> findByCrowdId(String crowdId,int index,int stepSize) ;
 }
