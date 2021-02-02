@@ -13,6 +13,26 @@ spring:
       charset: UTF-8
       force: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        # 打开所有的监控点
+        include: "*"
+        #BeasPath:https://localhost/actuator
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      # 通过指定接口关闭 SpringBoot
+      enabled: true
+
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml  #MyBatis配置文件所在路径
   type-aliases-package: com.kould.vo  #定义所有操作类的别名所在包
+
+#info:
+#  app.name: Kould.net-RunNote
+#  company.name: www.Kould.com
+#  pom.artifactId: $project.artifactId$
+#  pom.version: $project.version$
