@@ -42,6 +42,8 @@ public interface ICrowdDAO {
     public int insertUserDependence(@Param("crowdId") String crowdId,@Param("userId") String userId) ;
     @Delete("DELETE FROM CrowdAndUser WHERE Crowd_id=#{crowdId} AND User_id=#{userId};")
     public int deleteUserDependence(@Param("crowdId") String crowdId,@Param("userId") String userId) ;
+    @Delete("DELETE FROM CrowdAndUser WHERE Crowd_id=#{crowdId} ;")
+    public int deleteAllUserOfOneCrowdDependence(@Param("crowdId") String crowdId) ;
     @Select("SELECT Crowd.id,Crowd.crowdName,Crowd.createTime,Crowd.avatar " +
             "FROM Crowd " +
             "INNER JOIN CrowdAndUser ON CrowdAndUser.Crowd_id=Crowd.id " +

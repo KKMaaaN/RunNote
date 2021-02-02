@@ -20,7 +20,6 @@ public class MessageController {
         return "歡迎來到RunNote" ;
     }
 
-    @Secured({"ROLE_user"})
     @RequestMapping(value = "message",method = RequestMethod.POST)
     public Object userMsg() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())

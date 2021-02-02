@@ -13,8 +13,8 @@
             記住爺
             <input type="checkbox" name="remember-me"/>
         </span>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit" value="login"/>
     </form>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 </body>
 </html>

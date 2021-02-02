@@ -10,7 +10,7 @@
         index:<input type="text" name="index">
         stepSize:<input type="text" name="stepSize">
         <input type="submit"/>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </form>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 </body>
 </html>

@@ -30,8 +30,8 @@ public class CrowdServiceImpl implements ICrowdService {
     }
 
     @Override
-    public int remove(String crowdId, String userId) {
-        this.crowdDAO.deleteUserDependence(crowdId, userId) ;
+    public int remove(String crowdId) {
+        this.crowdDAO.deleteAllUserOfOneCrowdDependence(crowdId) ;
         this.crowdDAO.delete(crowdId) ;
         return 1;
     }
@@ -56,6 +56,18 @@ public class CrowdServiceImpl implements ICrowdService {
     public List<Crowd> allCrowdList(int index,int stepSize) {
         return setCrows(this.crowdDAO.selectOfCrowdAll(pageAdapter.indexBeStart(index, stepSize),stepSize),
                 index, stepSize);
+    }
+
+    @Override
+    public int addUserOfCrowd(String crowdId, String userId) {
+        this.crowdDAO.insertUserDependence(crowdId ,userId) ;
+        return 1;
+    }
+
+    @Override
+    public int removeUserOfCrowd(String crowdId, String userId) {
+        this.crowdDAO.deleteUserDependence(crowdId, userId) ;
+        return 1;
     }
 
     @Override
